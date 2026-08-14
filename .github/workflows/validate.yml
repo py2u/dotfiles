@@ -13,7 +13,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install validation tools
         run: sudo apt-get update && sudo apt-get install --yes stow zsh lua5.4
@@ -50,7 +50,7 @@ jobs:
   validate-brewfile:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Validate Brewfile manifest
         run: brew bundle list --file=Brewfile --all
