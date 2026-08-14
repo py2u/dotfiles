@@ -35,3 +35,22 @@ jobs:
         run: |
           find nvim/.config/nvim wezterm/.config/wezterm -name '*.lua' -print0 \
             | xargs -0 -n1 luac5.4 -p
+
+      - name: Generate installation summary
+        run: |
+          {
+            echo "## Installation"
+            echo
+            echo '```sh'
+            echo "brew bundle"
+            echo "stow git nvim tmux vscode wezterm zsh"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  validate-brewfile:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate Brewfile manifest
+        run: brew bundle list --file=Brewfile --all
