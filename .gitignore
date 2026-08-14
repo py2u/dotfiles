@@ -1,0 +1,5 @@
+.DS_Store
+.env
+*.backup.*
+*.local
+nvim/.config/nvim/plugin/packer_compiled.lua
