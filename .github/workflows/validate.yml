@@ -1,0 +1,37 @@
+name: Validate dotfiles
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install validation tools
+        run: sudo apt-get update && sudo apt-get install --yes stow zsh lua5.4
+
+      - name: Validate Stow packages
+        run: |
+          mkdir -p "$RUNNER_TEMP/home"
+          stow --simulate --verbose=1 --target="$RUNNER_TEMP/home" git nvim tmux vscode wezterm zsh
+
+      - name: Validate shell configuration syntax
+        run: |
+          sh -n install.sh
+          zsh -n zsh/.p10k.zsh
+          zsh -n zsh/.zprofile
+          zsh -n zsh/.zshenv
+          zsh -n zsh/.zshrc
+
+      - name: Validate Lua configuration syntax
+        run: |
+          find nvim/.config/nvim wezterm/.config/wezterm -name '*.lua' -print0 \
+            | xargs -0 -n1 luac5.4 -p
