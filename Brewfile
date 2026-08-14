@@ -1,0 +1,12 @@
+brew "eza"
+brew "git"
+brew "neovim"
+brew "powerlevel10k"
+brew "stow"
+brew "tmux"
+brew "zoxide"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+
+cask "font-jetbrains-mono-nerd-font"
+cask "wezterm"
