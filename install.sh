@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+
+dotfiles_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+cd "$dotfiles_dir"
+stow --target="$HOME" nvim wezterm zsh
